@@ -1,4 +1,3 @@
-from dotenv import load_dotenv
 import os
 import sys
 import pandas as pd
@@ -8,7 +7,9 @@ import numpy as np
 import requests
 from sklearn.decomposition import PCA
 from sklearn.impute import SimpleImputer
+os.environ['AIPROXY_TOKEN']='eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjIzZjEwMDIyNTRAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.De_QfoiUUQ5z9DFkZ3sKyXnu-YAT92XUmQ9Fq7K6EJw'
 print('****************************** SCRIPT START ******************************')
+
 def load_data():
     r"""Loads the data by pd.read_csv. Run uv autolysis.py and dataset.csv"""
     try:
@@ -20,7 +21,6 @@ def load_data():
     except:
         raise Exception("Dataset File is missing. Use uv run autolysis.py <CSV FILE PATH>")
 
-
 def give_name(string: str):
     r"""
     Returns the filtered filename without . and \.
@@ -30,7 +30,6 @@ def give_name(string: str):
     if "." in string:
         string = string.split(".")[0]
     return string
-
 
 def missing_plot(data):
     r"""Creates a bar chart for missing data by columns."""
@@ -50,7 +49,6 @@ def missing_plot(data):
         plt.savefig(f"{name}/missing_plot.png")
         plt.close()
         return f"{name}/missing_plot.png"
-
 
 def create_correlation_heatmap(data):
     r"""
@@ -78,11 +76,9 @@ def create_correlation_heatmap(data):
     plt.savefig(f"{name}/correlation_heatmap.png")
     return f"{name}/correlation_heatmap.png"
 
-
 def description_of_data(data):
     r"""Gives a short description of the data."""
     return str(data.describe(include="all"))
-
 
 def number_of_important_columns_plot(data):
     r"""Plots cumulative explained variance using PCA."""
@@ -132,7 +128,6 @@ def generate_directory():
     except FileExistsError:
         pass
 
-
 def get_story(data, images):
     r"""Generates a narrative from the data and plots."""
     proxy_url = "https://aiproxy.sanand.workers.dev/openai/v1/chat/completions"
@@ -164,7 +159,6 @@ def get_story(data, images):
         return ai_response["choices"][0]["message"]["content"].strip()
     return f"Error fetching story. Status code: {response.status_code}"
 
-
 def write_readme(story):
     r"""Writes the generated story to a README.md file."""
     readme_path = f"{name}/README.md"
@@ -173,21 +167,18 @@ def write_readme(story):
         f.write(story)
     print(f"README.md file created at {readme_path}")
 
-
 # Main Script
-load_dotenv()
 data = load_data()
 name = give_name(sys.argv[1])
 
 generate_directory()
 
-
 data_summary = description_of_data(data)
 plot_files = [
-missing_plot(data),
-number_of_important_columns_plot(data),
-plot_all_scatter_pairs(data),
-create_correlation_heatmap(data)
+    missing_plot(data),
+    number_of_important_columns_plot(data),
+    plot_all_scatter_pairs(data),
+    create_correlation_heatmap(data)
 ]
 
 story = get_story(data_summary, plot_files)
