@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import os
 import sys
 import pandas as pd
-import seaborn as sns
+import seaborn
 import matplotlib.pyplot as plt
 import numpy as np
 import requests
@@ -69,7 +69,7 @@ def create_correlation_heatmap(data):
 
     # Create the heatmap
     plt.figure(figsize=(10, 8))
-    sns.heatmap(correlation_matrix, annot=True, fmt=".2f", cmap='coolwarm', cbar=True, square=True)
+    seaborn.heatmap(correlation_matrix, annot=True, fmt=".2f", cmap='coolwarm', cbar=True, square=True)
     plt.title('Correlation Heatmap')
     plt.tight_layout()
     plt.savefig(f"{name}/correlation_heatmap.png")
@@ -115,7 +115,7 @@ def plot_all_scatter_pairs(data):
     if numeric_data.empty:
         raise ValueError("No numeric columns found in the dataset.")
 
-    sns.pairplot(numeric_data, diag_kind="kde", plot_kws={"alpha": 0.6})
+    seaborn.pairplot(numeric_data, diag_kind="kde", plot_kws={"alpha": 0.6})
     plt.suptitle(f"Scatter Plots for Numeric Columns in {name} dataset", y=1.02)
     plt.savefig(f"{name}/scatter_plot.png")
     plt.close()
