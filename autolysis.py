@@ -10,6 +10,7 @@ from sklearn.decomposition import PCA
 from sklearn.impute import SimpleImputer
 print('****************************** SCRIPT START ******************************')
 def load_data():
+    r"""Loads the data by pd.read_csv. Run uv autolysis.py and dataset.csv"""
     try:
         data = pd.read_csv(sys.argv[1])
         return data
@@ -21,7 +22,9 @@ def load_data():
 
 
 def give_name(string: str):
-    """Returns the filtered filename without . and \."""
+    r"""
+    Returns the filtered filename without . and \.
+    """
     if "\\" in string:
         string = string.split("\\")[-1]
     if "." in string:
@@ -30,7 +33,7 @@ def give_name(string: str):
 
 
 def missing_plot(data):
-    """Creates a bar chart for missing data by columns."""
+    r"""Creates a bar chart for missing data by columns."""
     missing_cols = []
     missing_values = []
     for col in data.columns:
@@ -50,7 +53,7 @@ def missing_plot(data):
 
 
 def create_correlation_heatmap(data):
-    """
+    r"""
     Generates a heatmap of correlations between numerical features in the dataset.
 
     Parameters:
@@ -77,12 +80,12 @@ def create_correlation_heatmap(data):
 
 
 def description_of_data(data):
-    """Gives a short description of the data."""
+    r"""Gives a short description of the data."""
     return str(data.describe(include="all"))
 
 
 def number_of_important_columns_plot(data):
-    """Plots cumulative explained variance using PCA."""
+    r"""Plots cumulative explained variance using PCA."""
     numeric_data = data.select_dtypes(include=["number"])
 
     if numeric_data.empty:
@@ -110,7 +113,7 @@ def number_of_important_columns_plot(data):
     return f"{name}/number_of_important_columns.png"
 
 def plot_all_scatter_pairs(data):
-    """Creates scatter plots for all pairs of numeric columns in the dataset."""
+    r"""Creates scatter plots for all pairs of numeric columns in the dataset."""
     numeric_data = data.select_dtypes(include=["number"])
     if numeric_data.empty:
         raise ValueError("No numeric columns found in the dataset.")
@@ -122,7 +125,7 @@ def plot_all_scatter_pairs(data):
     return f"{name}/scatter_plot.png"
 
 def generate_directory():
-    """Creates a directory for storing results."""
+    r"""Creates a directory for storing results."""
     processed_name = give_name(sys.argv[1])
     try:
         os.makedirs(processed_name)
@@ -131,7 +134,7 @@ def generate_directory():
 
 
 def get_story(data, images):
-    """Generates a narrative from the data and plots."""
+    r"""Generates a narrative from the data and plots."""
     proxy_url = "https://aiproxy.sanand.workers.dev/openai/v1/chat/completions"
     headers = {
         "Content-Type": "application/json",
@@ -163,7 +166,7 @@ def get_story(data, images):
 
 
 def write_readme(story):
-    """Writes the generated story to a README.md file."""
+    r"""Writes the generated story to a README.md file."""
     readme_path = f"{name}/README.md"
     with open(readme_path, "w") as f:
         f.write("# Analysis Report\n\n")
