@@ -32,3 +32,48 @@
   ```bash
   uv run autolysis.py dataset.csv
   ```
+## Example
+
+If you run the script with `goodreads.csv`:
+
+```bash
+uv run autolysis.py goodreads.csv
+```
+# It will create a directory named goodreads with the following files:
+
+- README.md: Contains the story of the dataset analysis.
+- missing_plot.png: Bar plot visualizing missing data.
+- number_of_important_columns.png: Line plot of cumulative explained variance using PCA.
+- scatter_plot.png: Scatter plot matrix of numeric features.
+- correlation_heatmap.png: Heatmap of the correlation between numerical features.
+### Analysis Summary
+- For each dataset, the following analysis steps are performed:
+
+1. Missing Data Analysis: Bar plot showing the number of missing values per column.
+2. Principal Component Analysis (PCA): A plot showing the cumulative explained variance by principal components.
+3. Scatter Plot: Visualizing the relationships between numeric columns.
+4. Correlation Heatmap: A heatmap showing the correlation between numeric features.
+### Results
+- Once the analysis is complete, a report is automatically generated as a README.md file along with corresponding charts.
+
+- Here are the generated visualizations:
+
+- Missing Data Plot
+<img src="goodreads/missing_plot.png"/>
+
+- Cumulative Explained Variance (PCA)
+<img src="goodreads/number_of_important_columns.png"/>
+
+- Scatter Plot
+<img src="goodreads/scatter_plot.png"/>
+- Correlation Heatmap
+<img src="goodreads/correlation_heatmap.png"/>
+
+### Conclusion
+- The autolysis.py script simplifies the process of understanding and analyzing datasets by automating data exploration and visualization tasks. This tool can be useful for quick exploratory analysis, especially when combined with machine learning models like GPT-4o-Mini for generating narrative reports.
+
+### License
+- This project is available under the MIT License.
+```bash
+You can copy and paste this into your `README.md` file.
+```
