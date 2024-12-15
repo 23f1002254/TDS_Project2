@@ -7,7 +7,7 @@ import numpy as np
 import requests
 from sklearn.decomposition import PCA
 from sklearn.impute import SimpleImputer
-os.environ['AIPROXY_TOKEN']='eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjIzZjEwMDIyNTRAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.De_QfoiUUQ5z9DFkZ3sKyXnu-YAT92XUmQ9Fq7K6EJw'
+from credentials import *
 print('****************************** SCRIPT START ******************************')
 
 def load_data():
