@@ -74,6 +74,4 @@ uv run autolysis.py goodreads.csv
 
 ### License
 - This project is available under the MIT License.
-```bash
-You can copy and paste this into your `README.md` file.
-```
+
